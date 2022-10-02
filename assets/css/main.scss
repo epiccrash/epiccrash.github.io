@@ -1,9 +1,12 @@
 ---
 ---
 
-// Imports
+// External Imports
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import 'bootstrap/scss/bootstrap';
+
+// Internal CSS Imports
+@import 'colors';
 
 // Actual content here
 html {
@@ -12,4 +15,112 @@ html {
 
 body {
 	font-family: "Lato", sans-serif;
+	padding: 72px;
+}
+
+:root {
+	--small-buffer: 8px;
+	--buffer: 16px
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.buffer-margin {
+	margin: var(--buffer);
+}
+
+.buffer-margin-left {
+	margin-left: var(--buffer);
+}
+
+.buffer-margin-right {
+	margin-right: var(--buffer);
+}
+
+.link-highlight {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.link-highlight:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-100%, -50%) scale(0, 1);
+	width: calc(100% + var(--buffer));
+	height: calc(100% + var(--buffer));
+	background: var(--fill-color);
+	transition: transform 0.5s;
+	z-index: -1;
+}
+
+.nav-link:hover > .link-highlight {
+	color: #fff;
+}
+
+.nav-link:hover > .link-highlight:before {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.active-link {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.active-link:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1);
+	width: calc(100% + var(--buffer));
+	height: calc(100% + var(--buffer));
+	background: var(--fill-color);
+	z-index: -1;
+}
+
+.inner-div {
+	text-shadow: rgb(40, 36, 44) 1px 0px 0px, rgb(40, 36, 44) 0.540302px 0.841471px 0px, rgb(40, 36, 44) -0.416147px 0.909297px 0px, rgb(40, 36, 44) -0.989993px 0.14112px 0px, rgb(40, 36, 44) -0.653644px -0.756803px 0px, rgb(40, 36, 44) 0.283662px -0.958924px 0px, rgb(40, 36, 44) 0.96017px -0.279416px 0px;
+}
+
+@media only screen and (min-width: 992px) {
+	.nav-item {
+		width: 25%;
+	}
+
+	.link-highlight:before {
+		transform: translate(-50%, 0%) scale(1, 0);
+		height: calc(100% + 2 * var(--buffer));
+	}
+
+	.active-link:before {
+		height: calc(100% + 2 * var(--buffer));
+	}
+
+	.nav-link:hover > .link-highlight:before {
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.navbar {
+		padding-bottom: 0px;
+	}
+
+	.navbar-brand {
+		margin-bottom: var(--small-buffer);
+	}
+
+	.navbar-toggler {
+		margin-bottom: var(--small-buffer);
+	}
+
+	.buffer-margin-bottom-small {
+		margin-bottom: var(--buffer) / 2;
+	}
 }
